@@ -853,12 +853,11 @@ bool Display(float timeDelta)
 		Draw_Splashes();
 		Draw_Sprites();
 
-
 		//Draw FPS
 		if( Font )
 		{
-			Font->DrawText(20, 20, 0xff000000, (LPCWSTR)FPSString);
-			Font->DrawText(20, 50, 0xff000000, (LPCWSTR)Values);
+			Font->DrawText(20, 20, 0xff000000, FPSString);
+			Font->DrawText(20, 50, 0xff000000, Values);
 		};
 		
 		device->EndScene();

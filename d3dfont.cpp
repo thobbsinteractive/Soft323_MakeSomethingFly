@@ -480,7 +480,7 @@ HRESULT CD3DFont::DrawTextScaled( FLOAT x, FLOAT y, FLOAT z,
 // Desc: Draws 2D text
 //-----------------------------------------------------------------------------
 HRESULT CD3DFont::DrawText( FLOAT sx, FLOAT sy, DWORD dwColor,
-                            const TCHAR* strText, DWORD dwFlags )
+                            const char* strText, DWORD dwFlags )
 {
     if( m_pd3dDevice == NULL )
         return E_FAIL;
