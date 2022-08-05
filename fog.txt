@@ -1,0 +1,62 @@
+////////////////////////////////////////////////////////////////////////////
+// 
+// File: fog.txt
+// 
+// Author: Frank Luna (C) All Rights Reserved
+//
+// System: AMD Athlon 1800+ XP, 512 DDR, Geforce 3, Windows XP, MSVC++ 7.0 
+//
+// Desc: Effect file that handles device states for linear vertex fog.
+//          
+////////////////////////////////////////////////////////////////////////////
+
+// 
+// Effect
+//
+
+technique Fog
+{
+    pass P0
+    {
+
+        //
+        // Fog States
+
+        FogVertexMode = EXP; // Exponential fog function
+        FogDensity = 0.0007;
+        FogColor      = 0x00FFFFFF; // White
+        FogEnable     = true;       // enable
+    }
+}
+
+technique FogSkyBox
+{
+    pass P0
+    {
+
+        //
+        // Fog States
+
+        FogVertexMode = EXP; // Exponential fog function
+        FogDensity = 0.00005;
+
+        FogColor      = 0x00FFFFFF; // White
+        FogEnable     = true;       // enable
+    }
+}
+
+technique FogReflections
+{
+    pass P0
+    {
+
+        //
+        // Fog States
+
+        FogVertexMode = EXP; // Exponential fog function
+        FogDensity = 0.00008;
+
+        FogColor      = 0x00FFFFFF; // white
+        FogEnable     = true;       // enable
+    }
+}
