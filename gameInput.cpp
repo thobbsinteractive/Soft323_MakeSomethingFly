@@ -53,31 +53,31 @@ bool GameInput::setup_Input(HINSTANCE* mainInstance,HWND* hwnd, UserInputs* _key
 	if (FAILED(DirectInput8Create(*mainInstance, DIRECTINPUT_VERSION, 
 			   IID_IDirectInput8, (void**)&directInput, NULL)))
 	{
-		MessageBox(NULL, "Error creating input device", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error creating input device", L"MakeSomethingFly.exe", MB_OK);
 		failed = true;
 	}
   
 	if (FAILED(directInput->CreateDevice(GUID_SysKeyboard, &keyboardDevice, NULL)))
 	{
-		MessageBox(NULL, "Error creating keyboard device", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error creating keyboard device", L"MakeSomethingFly.exe", MB_OK);
 		failed = true;
 	}
   
 	if (FAILED(keyboardDevice->SetDataFormat(&c_dfDIKeyboard)))
     {
-		MessageBox(NULL, "Error setting data format", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error setting data format", L"MakeSomethingFly.exe", MB_OK);
 		failed = true;
 	}
 	
 	if (FAILED(keyboardDevice->SetCooperativeLevel(*hwnd, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
     {
-		MessageBox(NULL, "Error setting SetCooperativeLevel", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error setting SetCooperativeLevel", L"MakeSomethingFly.exe", MB_OK);
 		failed = true;
 	}	
   
 	if (FAILED(keyboardDevice->Acquire()))
     { 
-		MessageBox(NULL, "Error acquiring keyboard", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error acquiring keyboard", L"MakeSomethingFly.exe", MB_OK);
 		failed = true;
 	}
 
@@ -122,13 +122,13 @@ void GameInput::checkInputs()
 	// Check the keyboard status
 	if (FAILED(keyboardDevice->GetDeviceState(sizeof(unsigned char[256]), (LPVOID)keystate)))
     {	
-		MessageBox(NULL, "Error getting key status", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error getting key status", L"MakeSomethingFly.exe", MB_OK);
 	}
 
 	// Check Mouse status
 	if (FAILED(mouseDevice->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&mouse_state)))
 	{
-		MessageBox(NULL, "Error getting mouse status", "MakeSomethingFly.exe", MB_OK);
+		MessageBox(NULL, L"Error getting mouse status", L"MakeSomethingFly.exe", MB_OK);
 	}
 	
 	

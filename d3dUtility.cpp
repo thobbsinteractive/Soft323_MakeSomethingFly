@@ -23,22 +23,22 @@ bool d3d::InitD3D(HINSTANCE hInstance,
 	wc.hCursor       = LoadCursor(0, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wc.lpszMenuName  = 0;
-	wc.lpszClassName = "Direct3D9App";
+	wc.lpszClassName = L"Direct3D9App";
 
 	if( !RegisterClass(&wc) ) 
 	{
-		::MessageBox(0, "RegisterClass() - FAILED", 0, 0);
+		::MessageBox(0, L"RegisterClass() - FAILED", 0, 0);
 		return false;
 	}
 		
-	*hwnd = ::CreateWindow("Direct3D9App", "Direct3D9App", 
+	*hwnd = ::CreateWindow(L"Direct3D9App", L"Direct3D9App", 
 		WS_EX_TOPMOST,
 		0, 0, width, height,
 		0 /*parent hwnd*/, 0 /* menu */, hInstance, 0 /*extra*/); 
 
 	if( !*hwnd )
 	{
-		::MessageBox(0, "CreateWindow() - FAILED", 0, 0);
+		::MessageBox(0, L"CreateWindow() - FAILED", 0, 0);
 		return false;
 	}
 
@@ -57,7 +57,7 @@ int d3d::EnterMsgLoop( bool (*ptr_display)(float timeDelta) )
 	MSG msg;
 	::ZeroMemory(&msg, sizeof(MSG));
 
-	static float lastTime = (float)timeGetTime(); 
+	static std::chrono::system_clock::time_point lastTime = std::chrono::system_clock::now();
 
 	while(msg.message != WM_QUIT)
 	{
@@ -68,10 +68,18 @@ int d3d::EnterMsgLoop( bool (*ptr_display)(float timeDelta) )
 		}
 		else
         {	
-			float currTime  = (float)timeGetTime();
-			float timeDelta = (currTime - lastTime)*0.001f;
+			std::chrono::system_clock::time_point currTime  = std::chrono::system_clock::now();
+			std::chrono::duration<double, std::milli> timeDelta = (currTime - lastTime)*0.001f;
 
-			ptr_display(timeDelta);
+			ptr_display(timeDelta.count());
+
+			std::chrono::duration<double, std::milli> renderTimeMS = std::chrono::system_clock::now() - currTime;
+
+			//lock to 60 fps
+			if (renderTimeMS.count() > 0.0 && renderTimeMS.count() < 16.0)
+			{
+				Sleep(16.0f - renderTimeMS.count());
+			}
 
 			lastTime = currTime;
         }

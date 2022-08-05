@@ -66,14 +66,14 @@ void Surface::setupSurface(IDirect3DDevice9* device,int _numVertsPerRow,
 	// compute the vertices
 	if( !computeVertices() )
 	{
-		::MessageBox(0, "computeVertices - FAILED", 0, 0);
+		::MessageBox(0, L"computeVertices - FAILED", 0, 0);
 		::PostQuitMessage(0);
 	}
 
 	// compute the indices
 	if( !computeIndices() )
 	{
-		::MessageBox(0, "computeIndices - FAILED", 0, 0);
+		::MessageBox(0, L"computeIndices - FAILED", 0, 0);
 		::PostQuitMessage(0);
 	}
 }
